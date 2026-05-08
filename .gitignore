@@ -1,0 +1,21 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+
+# Local evaluation outputs
+results/
+analysis/
+new_results/
+
+# Local logs / checkpoints
+*.log
+.train_reasoning_ckpt.jsonl
+
+# OS / editor noise
+.DS_Store
+.idea/
+.vscode/
+
+data/

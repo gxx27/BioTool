@@ -1,0 +1,1056 @@
+[
+    {
+        "function": "esearch",
+        "document": {
+            "name": "esearch",
+            "description": "Search an NCBI Entrez database and return UIDs matching a text query. (Source: ESearch provides a list of UIDs matching a text query and supports posting and combining result sets on the History server.)",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "db": {
+                        "type": "string",
+                        "description": "Database to search. Must be a valid Entrez database name (default is 'pubmed')."
+                    },
+                    "term": {
+                        "type": "string",
+                        "description": "Entrez text query. URL encode special characters; spaces may be '+' or '%20'."
+                    },
+                    "retstart": {
+                        "type": "integer",
+                        "description": "Index of the first UID to show in output (default=0)."
+                    },
+                    "retmax": {
+                        "type": "integer",
+                        "description": "Number of UIDs to include in output (default=20, maximum=10000)."
+                    },
+                    "rettype": {
+                        "type": "string",
+                        "description": "Retrieval type: 'uilist' (default) or 'count'."
+                    },
+                    "retmode": {
+                        "type": "string",
+                        "description": "Output format. 'xml' (default) or 'json'."
+                    },
+                    "sort": {
+                        "type": "string",
+                        "description": "Sort order for returned UIDs. Values depend on database (e.g., 'relevance', 'name')."
+                    },
+                    "field": {
+                        "type": "string",
+                        "description": "Limit the search to the specified Entrez field (e.g., 'title')."
+                    },
+                    "idtype": {
+                        "type": "string",
+                        "description": "For sequence databases, 'acc' to return accession.version identifiers instead of GI numbers."
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "db",
+                    "term"
+                ]
+            }
+        },
+        "params": {
+            "db": "nuccore",
+            "term": "Hereford[Breed]"
+        },
+        "observation": "{\n  \"header\": {\n    \"type\": \"esearch\",\n    \"version\": \"0.3\"\n  },\n  \"esearchresult\": {\n    \"count\": \"98575\",\n    \"retmax\": \"20\",\n    \"retstart\": \"0\",\n    \"idlist\": [\n      \"3117326923\",\n      \"3117326904\",\n      \"3117326899\",\n      \"3108774163\",\n      \"3108339034\",\n      \"3108338916\",\n      \"402691999\",\n      \"329664841\",\n      \"329664401\",\n      \"563319838\",\n      \"2865832416\",\n      \"2865832383\",\n      \"2865832341\",\n      \"2860060205\",\n      \"2694681425\",\n      \"2669947154\",\n      \"2669947100\",\n      \"522019167\",\n      \"1393428248\",\n      \"402743976\"\n    ],\n    \"translationset\": [],\n    \"translationstack\": [\n      {\n        \"term\": \"Hereford[Breed]\",\n        \"field\": \"Breed\",\n        \"count\": \"1\",\n        \"explode\": \"N\"\n      },\n      \"GROUP\"\n    ],\n    \"querytranslation\": \"Hereford[Breed]\"\n  }\n}",
+        "query": "Search for nucleotide sequences associated with the Hereford breed."
+    },
+    {
+        "function": "get_homology_by_id",
+        "document": {
+            "name": "get_homology_by_id",
+            "description": "Retrieves homology information (orthologs) by species and Ensembl gene id (Source: The Comparative Genomics endpoints provide access to comparative genomics data including gene trees and homology information.)",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "An Ensembl stable ID"
+                    },
+                    "species": {
+                        "type": "string",
+                        "description": "Species name/alias"
+                    },
+                    "aligned": {
+                        "type": "boolean",
+                        "description": "Return the aligned string if true. Otherwise, return the original sequence (no insertions)"
+                    },
+                    "cigar_line": {
+                        "type": "boolean",
+                        "description": "Return the aligned sequence encoded in CIGAR format"
+                    },
+                    "compara": {
+                        "type": "string",
+                        "description": "Name of the compara database to use. Multiple comparas exist on a server for separate species divisions"
+                    },
+                    "format": {
+                        "type": "string",
+                        "description": "Layout of the response"
+                    },
+                    "sequence": {
+                        "type": "string",
+                        "description": "The type of sequence to bring back. Setting it to none results in no sequence being returned"
+                    },
+                    "target_species": {
+                        "type": "string",
+                        "description": "Filter by species. Supports all species aliases"
+                    },
+                    "target_taxon": {
+                        "type": "integer",
+                        "description": "Filter by taxon"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "The type of homology to return from this call. Projections are orthology calls defined between alternative assemblies and the genes shared between them. Useful if you need only one type of homology back from the service"
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "id",
+                    "species"
+                ]
+            }
+        },
+        "params": {
+            "species": "strigops_habroptila",
+            "id": "ENSSHBG00005000008",
+            "compara": "vertebrates"
+        },
+        "observation": "{\n  \"summary\": {\n    \"total_homologies\": 198,\n    \"type_counts\": {\n      \"within_species_paralog\": 1,\n      \"ortholog_one2many\": 171,\n      \"ortholog_many2many\": 26\n    },\n    \"taxonomy_level_counts\": {\n      \"Strigops habroptila\": 1,\n      \"Neognathae\": 5,\n      \"Australaves\": 5,\n      \"Telluraves\": 1,\n      \"Vertebrata\": 1,\n      \"Gnathostomata\": 74,\n      \"Sarcopterygii\": 1,\n      \"Tetrapoda\": 2,\n      \"Archelosauria\": 6,\n      \"Archosauria\": 1,\n      \"Sauria\": 8,\n      \"Amniota\": 93\n    }\n  },\n  \"gene_id\": \"ENSSHBG00005000008\",\n  \"examples\": [\n    {\n      \"method_link_type\": \"ENSEMBL_PARALOGUES\",\n      \"target\": {\n        \"perc_pos\": 57.4513,\n        \"align_seq\": \"MSAAGPGAPAPLSRKQRLMAALTNGEAAAGGPGAPQPPAPPLCCFICGGGISRGKELKLQVRPPRDHRPFFPFLQHQEPAPGARAVSAEGCALVCAVCRC...[truncated]\",\n        \"protein_id\": \"ENSSHBP00005013396\",\n        \"perc_id\": 55.2396,\n        \"id\": \"ENSSHBG00005011741\",\n        \"cigar_line\": \"1034M2D360MD505M\",\n        \"taxon_id\": 2489341,\n        \"species\": \"strigops_habroptila\"\n      },\n      \"type\": \"within_species_paralog\",\n      \"taxonomy_level\": \"Strigops habroptila\",\n      \"source\": {\n        \"id\": \"ENSSHBG00005000008\",\n        \"perc_id\": 89.3526,\n        \"species\": \"strigops_habroptila\",\n        \"cigar_line\": \"690D3M3D146M3D308M3D197M9D204M5D32M3D126MD53M11D105M\",\n        \"taxon_id\": 2489341,\n        \"align_seq\": \"----------------------------------------------------------------------------------------------------...[truncated]\",\n        \"protein_id\": \"ENSSHBP00005000009\",\n        \"perc_pos\": 92.9302\n      },\n      \"dn_ds\": null\n    },\n    {\n      \"type\": \"ortholog_one2many\",\n      \"target\": {\n        \"species\": \"anas_platyrhynchos_platyrhynchos\",\n        \"taxon_id\": 8840,\n        \"cigar_line\": \"3M3D285M25D29M2D348M7D5MD228MD133M2D19M3D121M\",\n        \"id\": \"ENSAPLG00000020408\",\n        \"perc_id\": 81.725,\n        \"perc_pos\": 86.8488,\n        \"protein_id\": \"ENSAPLP00000028398\",\n        \"align_seq\": \"LAG---MSHESKSPSLGMLSTATRTTATVSPLTPSPLNGSLVPNGSPAASSTLSVQAAPSSSFAAALRKLAKQAEEPRGSSISSESSPVSSPATNHSSPA...[truncated]\"\n      },\n      \"dn_ds\": null,\n      \"taxonomy_level\": \"Neognathae\",\n      \"source\": {\n        \"perc_pos\": 86.6269,\n        \"align_seq\": \"---FAGMSHEPKSPSLGMLSTTTRTTATISPLTLSPLNSSIVPNGSPAASSTLSVQAAPSSSFAAALRKLAKQAEEPRGSSISSESSPVSSPATNHSSPA...[truncated]\",\n        \"protein_id\": \"ENSSHBP00005000009\",\n        \"perc_id\": 81.5162,\n        \"id\": \"ENSSHBG00005000008\",\n        \"taxon_id\": 2489341,\n        \"cigar_line\": \"3D149M3D18MD290M3D197M9D236M3D55MD71M5D53M13D105M\",\n        \"species\": \"strigops_habroptila\"\n      },\n      \"method_link_type\": \"ENSEMBL_ORTHOLOGUES\"\n    },\n    {\n      \"method_link_type\": \"ENSEMBL_ORTHOLOGUES\",\n      \"target\": {\n        \"perc_pos\": 89.0815,\n        \"align_seq\": \"FAG---MSHESKSPSLGMLSTATRTTATVTP----------------AASSTLSVQAAPSSSFAAALRKLAKQAEEPRGSSISSESSPVSSPATNHSSPA...[truncated]\",\n        \"protein_id\": \"ENSMGAP00000007657\",\n        \"perc_id\": 84.4021,\n        \"id\": \"ENSMGAG00000007516\",\n        \"cigar_line\": \"3M3D25M16D296M2D92M3D265MD124M13D63MD3M3D43M4D101MD8M3D131M\",\n        \"taxon_id\": 9103,\n        \"species\": \"meleagris_gallopavo\"\n      },\n      \"type\": \"ortholog_one2many\",\n      \"taxonomy_level\": \"Neognathae\",\n      \"source\": {\n        \"species\": \"strigops_habroptila\",\n        \"taxon_id\": 2489341,\n        \"cigar_line\": \"3D149M2D308M3D197M9D362MD43MD4M3D6M8D105M\",\n        \"id\": \"ENSSHBG00005000008\",\n        \"perc_id\": 82.9642,\n        \"protein_id\": \"ENSSHBP00005000009\",\n        \"align_seq\": \"---FAGMSHEPKSPSLGMLSTTTRTTATISPLTLSPLNSSIVPNGSPAASSTLSVQAAPSSSFAAALRKLAKQAEEPRGSSISSESSPVSSPATNHSSPA...[truncated]\",\n        \"perc_pos\": 87.5639\n      },\n      \"dn_ds\": null\n    }\n  ]\n}",
+        "query": "What orthologs and paralogs are available for the Kakapo gene ENSSHBG00005000008 in vertebrates?"
+    },
+    {
+        "function": "search_uniprotkb",
+        "document": {
+            "name": "search_uniprotkb",
+            "description": "The search endpoint uses a request query to return all entries associated with the search term in a paginated list of entries. Use 'size' to specify the number of entries per page of results. Specify fields to return only data for specific sections of that entry that are of interest to you (Source: The UniProt Knowledgebase (UniProtKB) acts as the global hub of accurate, consistent and expertly curated information on protein sequence and function. Each UniProtKB entry is described by a stable protein identifier (accession ID) and contains core data consisting of the amino acid sequence, protein name or description, taxonomic information and links to relevant scientific publications. Further annotation is added when available, such as protein function, subcellular location and the position of protein features such as active sites, domains and post-translational modifications. Where possible these annotations are described using established biological ontologies, classifications and cross-references. A clear indication of the quality of annotation in the form of evidence attribution of experimental and computational data is added to each piece of data.)",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "Criteria to search UniProtKB. Advanced queries can be built with parentheses and conditionals such as AND, OR and NOT."
+                    },
+                    "fields": {
+                        "type": "string",
+                        "description": "List of entry sections (fields) to be returned, separated by commas."
+                    },
+                    "sort": {
+                        "type": "string",
+                        "description": "Specify field by which to sort results."
+                    },
+                    "includeIsoform": {
+                        "type": "boolean",
+                        "description": "Specify true to include isoforms, default is false."
+                    },
+                    "size": {
+                        "type": "integer",
+                        "description": "Specify the number of entries per page of results (Pagination size). Default is 25, max is 500"
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "query"
+                ]
+            }
+        },
+        "params": {
+            "query": "(protein_name:caspase AND go:\"0006915\") AND (taxonomy_id:9606 OR taxonomy_id:10090)",
+            "fields": "protein_name,xref_pro,xref_echobase",
+            "sort": "mass desc"
+        },
+        "observation": "{\n  \"total_results\": 25,\n  \"summaries\": [\n    {\n      \"accession\": \"Q14674\",\n      \"entryType\": \"UniProtKB reviewed (Swiss-Prot)\",\n      \"protein\": {\n        \"recommendedName\": \"Separin\",\n        \"ecNumber\": \"3.4.22.49\",\n        \"alternativeNames\": [\n          \"Caspase-like protein ESPL1\",\n          \"Extra spindle poles-like 1 protein\"\n        ]\n      },\n      \"crossReferences\": {\n        \"total\": 1,\n        \"topDatabases\": {\n          \"PRO\": 1\n        },\n        \"examples\": [\n          {\n            \"database\": \"PRO\",\n            \"id\": \"PR:Q14674\"\n          }\n        ]\n      }\n    },\n    {\n      \"accession\": \"Q9C000\",\n      \"entryType\": \"UniProtKB reviewed (Swiss-Prot)\",\n      \"protein\": {\n        \"recommendedName\": \"NACHT, LRR and PYD domains-containing protein 1\",\n        \"ecNumber\": \"3.4.-.-\",\n        \"alternativeNames\": [\n          \"Caspase recruitment domain-containing protein 7\",\n          \"Death effector filament-forming ced-4-like apoptosis protein\"\n        ]\n      },\n      \"crossReferences\": {\n        \"total\": 1,\n        \"topDatabases\": {\n          \"PRO\": 1\n        },\n        \"examples\": [\n          {\n            \"database\": \"PRO\",\n            \"id\": \"PR:Q9C000\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+        "query": "Find human or mouse caspases involved in apoptosis."
+    },
+    {
+        "function": "vep_by_id",
+        "document": {
+            "name": "vep_by_id",
+            "description": "Fetch variant consequences based on a variant identifier (Source: The VEP endpoints provide access to variant effect prediction and consequence analysis.)",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Query ID. Supports dbSNP, COSMIC and HGMD identifiers, including structural variant idefentifiers."
+                    },
+                    "species": {
+                        "type": "string",
+                        "description": "Species name/alias"
+                    },
+                    "AlphaMissense": {
+                        "type": "boolean",
+                        "description": "Annotates missense variants with the pre-computed AlphaMissense pathogenicity scores. AlphaMissense is a deep learning model developed by Google DeepMind that predicts the pathogenicity of single nucleotide missense variants."
+                    },
+                    "AncestralAllele": {
+                        "type": "boolean",
+                        "description": "Retrieves the ancestral allele for variants inferred from the Ensembl Compara Enredo-Pecan-Ortheus (EPO) pipeline"
+                    },
+                    "Blosum62": {
+                        "type": "boolean",
+                        "description": "Include BLOSUM62 amino acid conservation score"
+                    },
+                    "CADD": {
+                        "type": "boolean",
+                        "description": "Include CADD (Combined Annotation Dependent Depletion) deleteriousness scores for single nucleotide variants (also supports sus_scrofa), indels and structural variants (only supported in GRCh38). Following options can be given: snv, indels, snv_indels, and sv. Providing 1 is also supported which is same as providing snv_indels. Caution to be taken while using snv, indels or snv_indels options with structural variants as input. It can match unnecessary huge amount of lines in annotation file and in such cases no CADD annotation will be made. See license."
+                    },
+                    "ClinPred": {
+                        "type": "boolean",
+                        "description": "ClinPred is a prediction tool to identify disease-relevant nonsynonymous single nucleotide variants (only supported for human). The predictor incorporates existing pathogenicity scores and benefits from normal population allele frequencies. ClinPred is only available for non-commercial use."
+                    },
+                    "Conservation": {
+                        "type": "boolean",
+                        "description": "Retrieves a conservation score from the Ensembl Compara databases for variant positions"
+                    },
+                    "DosageSensitivity": {
+                        "type": "boolean",
+                        "description": "Retrieves haploinsufficiency and triplosensitivity probability scores for affected genes from a published dosage sensitivity catalogue."
+                    },
+                    "EVE": {
+                        "type": "boolean",
+                        "description": "EVE (evolutionary model of variant effect) is a computational method for the classification of human genetic variants trained solely on evolutionary sequences. See license."
+                    },
+                    "Enformer": {
+                        "type": "boolean",
+                        "description": "Predictions of variant impact on gene expression"
+                    },
+                    "GO": {
+                        "type": "boolean",
+                        "description": "Retrieves Gene Ontology terms associated with transcripts/translations"
+                    },
+                    "GeneSplicer": {
+                        "type": "boolean",
+                        "description": "Detects splice sites in genomic DNA"
+                    },
+                    "Geno2MP": {
+                        "type": "boolean",
+                        "description": "Geno2MP is a web-accessible database of rare variant genotypes linked to individual-level phenotypic profiles defined by human phenotype ontology (HPO) terms"
+                    },
+                    "IntAct": {
+                        "type": "boolean",
+                        "description": "Provides molecular interaction data for variants as reported by IntAct database."
+                    },
+                    "LOEUF": {
+                        "type": "boolean",
+                        "description": "Adds LOEUF (loss-of-function observed/expected upper bound fraction) constraint scores derived from gnomAD."
+                    },
+                    "LoF": {
+                        "type": "boolean",
+                        "description": "LOFTEE identifies LoF (loss-of-function) variation."
+                    },
+                    "MaveDB": {
+                        "type": "boolean",
+                        "description": "Provides scores from Multiplexed Assays of Variant Effect for variants as reported by MaveDB database."
+                    },
+                    "MaxEntScan": {
+                        "type": "boolean",
+                        "description": "Sequence motif and maximum entropy based splice site consensus predictions"
+                    },
+                    "NMD": {
+                        "type": "boolean",
+                        "description": "Predicts if a variant allows the transcript escape nonsense-mediated mRNA decay."
+                    },
+                    "OpenTargets": {
+                        "type": "boolean",
+                        "description": "Reports locus-to-gene (L2G) scores to predict causal genes at GWAS loci from Open Targets Genetics."
+                    },
+                    "Paralogues": {
+                        "type": "string",
+                        "description": "Retrieves ClinVar variants that overlap genomic coordinates corresponding to aligned amino acid positions in paralogous proteins. Available options: clinsig, clinsig_match, fields, min_perc_conv, min_perc_pos"
+                    },
+                    "Phenotypes": {
+                        "type": "boolean",
+                        "description": "Retrieves overlapping phenotype information"
+                    },
+                    "REVEL": {
+                        "type": "boolean",
+                        "description": "Rare Exome Variant Ensemble Learner (REVEL) is an ensemble method for predicting the pathogenicity of missense variants based on a combination of scores from multiple individual tools. REVEL is only available for non-commercial use."
+                    },
+                    "RiboseqORFs": {
+                        "type": "boolean",
+                        "description": "Calculates consequences for variants overlapping Ribo-seq ORFs"
+                    },
+                    "SpliceAI": {
+                        "type": "integer",
+                        "description": "Retrieves pre-calculated annotations from SpliceAI a deep neural network, developed by Illumina, Inc that predicts splice junctions from an arbitrary pre-mRNA transcript sequence. Used for non-commercial purposes."
+                    },
+                    "UTRAnnotator": {
+                        "type": "boolean",
+                        "description": "Annotates high-impact five prime UTR variants either creating new upstream ORFs or disrupting existing upstream ORFs"
+                    },
+                    "appris": {
+                        "type": "boolean",
+                        "description": "Include APPRIS isoform annotation"
+                    },
+                    "canonical": {
+                        "type": "boolean",
+                        "description": "Include a flag indicating the canonical transcript for a gene"
+                    },
+                    "ccds": {
+                        "type": "boolean",
+                        "description": "Include CCDS transcript identifiers"
+                    },
+                    "dbNSFP": {
+                        "type": "string",
+                        "description": "Comma-separated list of fields from dbNSFP, a database of pathogenicity predictions for missense variants. See dbNSFP README for field list or include all fields with ALL; this fetches a large amount of data per variant! By default, some fields contain values for all Ensembl transcripts; add transcript_match=1 to only return values for the matched Ensembl transcript."
+                    },
+                    "dbscSNV": {
+                        "type": "boolean",
+                        "description": "Predictions for splicing variants from dbscSNV."
+                    },
+                    "distance": {
+                        "type": "integer",
+                        "description": "Change the distance to transcript for which VEP assigns upstream and downstream consequences"
+                    },
+                    "domains": {
+                        "type": "boolean",
+                        "description": "Include names of overlapping protein domains"
+                    },
+                    "failed": {
+                        "type": "boolean",
+                        "description": "When checking for co-located variants, by default variants flagged as failed by Ensembl's QC pipeline will be excluded. Set this flag to 1 to include such variants"
+                    },
+                    "flag_pick": {
+                        "type": "boolean",
+                        "description": "As per pick, but adds the PICK flag to the chosen block of consequence data and retains others."
+                    },
+                    "flag_pick_allele": {
+                        "type": "boolean",
+                        "description": "As per pick_allele, but adds the PICK flag to the chosen block of consequence data and retains others."
+                    },
+                    "flag_pick_allele_gene": {
+                        "type": "boolean",
+                        "description": "As per pick_allele_gene, but adds the PICK flag to the chosen block of consequence data and retains others."
+                    },
+                    "ga4gh_vrs": {
+                        "type": "boolean",
+                        "description": "Add GA4GH Variation Representation Specification (VRS) notation"
+                    },
+                    "gencode_basic": {
+                        "type": "boolean",
+                        "description": "Limit your analysis to transcripts belonging to the GENCODE basic set. This set has fragmented or problematic transcripts removed."
+                    },
+                    "gencode_primary": {
+                        "type": "boolean",
+                        "description": "Limit your analysis to transcripts belonging to the GENCODE primary set."
+                    },
+                    "hgvs": {
+                        "type": "boolean",
+                        "description": "Include HGVS nomenclature based on Ensembl stable identifiers"
+                    },
+                    "mane": {
+                        "type": "boolean",
+                        "description": "Include MANE Select annotations (GRCh38 only)"
+                    },
+                    "merged": {
+                        "type": "boolean",
+                        "description": "Use merged Ensembl and RefSeq transcript set to report consequences (human only)"
+                    },
+                    "minimal": {
+                        "type": "boolean",
+                        "description": "Convert alleles to their most minimal representation before consequence calculation i.e. sequence that is identical between each pair of reference and alternate alleles is trimmed off from both ends, with coordinates adjusted accordingly. Note this may lead to discrepancies between input coordinates and coordinates reported by VEP relative to transcript sequences"
+                    },
+                    "mirna": {
+                        "type": "boolean",
+                        "description": "Determines where in the secondary structure of a miRNA a variant falls"
+                    },
+                    "mutfunc": {
+                        "type": "boolean",
+                        "description": "Predicts destabilization effect of protein structure, interaction, regulatory region etc. caused by a variant as reported by mutfunc database."
+                    },
+                    "numbers": {
+                        "type": "boolean",
+                        "description": "Include affected exon and intron positions within the transcript"
+                    },
+                    "per_gene": {
+                        "type": "boolean",
+                        "description": "Output only the most severe consequence per gene. The transcript selected is arbitrary if more than one has the same predicted consequence. Uses the same ranking system as pick."
+                    },
+                    "pick": {
+                        "type": "boolean",
+                        "description": "Pick one line or block of consequence data per variant, including transcript-specific columns. The order the criteria are applied may be customised with pick_order. This is the best method to use if you are interested only in one consequence per variant."
+                    },
+                    "pick_allele": {
+                        "type": "boolean",
+                        "description": "Like pick, but chooses one line or block of consequence data per variant allele. Will only differ in behaviour from pick when the input variant has multiple alternate alleles."
+                    },
+                    "pick_allele_gene": {
+                        "type": "boolean",
+                        "description": "Like pick_allele, but chooses one line or block of consequence data per variant allele and gene combination."
+                    },
+                    "pick_order": {
+                        "type": "string",
+                        "description": "Comma-separated list with order of criteria (and the list of criteria) applied when choosing a block of annotation data with one of the following options: pick, pick_allele, per_gene, pick_allele_gene, flag_pick, flag_pick_allele, flag_pick_allele_gene. Valid criteria are: [ canonical appris tsl biotype ccds rank length mane_select mane_clinical ]."
+                    },
+                    "protein": {
+                        "type": "boolean",
+                        "description": "Include Ensembl protein identifiers"
+                    },
+                    "refseq": {
+                        "type": "boolean",
+                        "description": "Use RefSeq transcript set to report consequences (human only)"
+                    },
+                    "shift_3prime": {
+                        "type": "boolean",
+                        "description": "Shift transcript-overlapping variants as far as possible in the 3' direction before providing consequences"
+                    },
+                    "shift_genomic": {
+                        "type": "boolean",
+                        "description": "Shift all variants as far as possible in the 3' direction before providing consequences"
+                    },
+                    "transcript_id": {
+                        "type": "string",
+                        "description": "Filter results by Transcript ID"
+                    },
+                    "transcript_version": {
+                        "type": "boolean",
+                        "description": "Add version numbers to Ensembl transcript identifiers"
+                    },
+                    "tsl": {
+                        "type": "boolean",
+                        "description": "Include transcript support level (TSL) annotation"
+                    },
+                    "uniprot": {
+                        "type": "boolean",
+                        "description": "Include best match accessions for translated protein products from three UniProt-related databases (SWISSPROT, TREMBL and UniParc)"
+                    },
+                    "variant_class": {
+                        "type": "boolean",
+                        "description": "Output the Sequence Ontology variant class for the input variant"
+                    },
+                    "vcf_string": {
+                        "type": "boolean",
+                        "description": "Include alleles in VCF format"
+                    },
+                    "xref_refseq": {
+                        "type": "boolean",
+                        "description": "Include aligned RefSeq mRNA identifiers for transcript. NB: theRefSeq and Ensembl transcripts aligned in this way MAY NOT, AND FREQUENTLY WILL NOT, match exactly in sequence, exon structure and protein product"
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "id",
+                    "species"
+                ]
+            }
+        },
+        "params": {
+            "species": "homo_sapiens",
+            "id": "COSM485301",
+            "flag_pick": 0,
+            "AlphaMissense": 1,
+            "flag_pick_allele": 0,
+            "Blosum62": 0,
+            "appris": 1,
+            "flag_pick_allele_gene": 1,
+            "numbers": 0,
+            "mane": 1,
+            "distance": 500,
+            "CADD": "snv_indels",
+            "SpliceAI": 2,
+            "Paralogues": "min_perc_pos=60",
+            "dbNSFP": "Polyphen2_HVAR_score,SIFT_converted_rankscore,SIFT_score;transcript_match=1",
+            "transcript_id": "ENST00000335137.1"
+        },
+        "observation": "[\n  {\n    \"seq_region_name\": \"7\",\n    \"colocated_variants\": [\n      {\n        \"strand\": 1,\n        \"phenotype_or_disease\": 1,\n        \"allele_string\": \"COSMIC_MUTATION\",\n        \"seq_region_name\": \"7\",\n        \"somatic\": 1,\n        \"var_synonyms\": {\n          \"COSMIC\": [\n            \"COSM7540565\"\n          ]\n        },\n        \"start\": 37909674,\n        \"id\": \"COSV101460873\",\n        \"end\": 37909674\n      },\n      {\n        \"phenotype_or_disease\": 1,\n        \"strand\": 1,\n        \"end\": 37909674,\n        \"start\": 37909674,\n        \"id\": \"COSV71412367\",\n        \"seq_region_name\": \"7\",\n        \"somatic\": 1,\n        \"var_synonyms\": {\n          \"COSMIC\": [\n            \"COSM485301\"\n          ]\n        },\n        \"allele_string\": \"COSMIC_MUTATION\"\n      }\n    ],\n    \"input\": \"COSM485301\",\n    \"most_severe_consequence\": \"?\",\n    \"end\": 37909674,\n    \"assembly_name\": \"GRCh38\",\n    \"strand\": 1,\n    \"start\": 37909674,\n    \"allele_string\": \"COSMIC_MUTATION\",\n    \"id\": \"COSM485301\"\n  }\n]",
+        "query": "What are the known disease associations for variant COSM485301?"
+    },
+    {
+        "function": "get_disease_by_id",
+        "document": {
+            "name": "get_disease_by_id",
+            "description": "Search human disease entry by id to return all data associated with that entry. Specify fields to return only data for specific sections of that entry that are of interest to you (Source: The human diseases in which proteins are involved are described in UniProtKB entries with a controlled vocabulary.)",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Unique identifier for the human disease entry"
+                    },
+                    "fields": {
+                        "type": "string",
+                        "description": "List of entry sections (fields) to be returned, separated by commas."
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "id"
+                ]
+            }
+        },
+        "params": {
+            "id": "DI-00394",
+            "fields": null
+        },
+        "observation": "{\n  \"name\": \"Diamond-Blackfan anemia 4\",\n  \"id\": \"DI-00394\",\n  \"acronym\": \"DBA4\",\n  \"definition\": \"A form of Diamond-Blackfan anemia, a congenital non-regenerative hypoplastic anemia that usually presents early in infancy. Diamond- Blackfan anemia is characterized by a moderate to severe macrocytic anemia, erythroblastopenia, and an increased risk of developing leukemia. 30 to 40% of Diamond-Blackfan anemia patients present with short stature and congenital anomalies, the most frequent being craniofacial (Pierre-Robin syndrome and cleft palate), thumb and urogenital anomalies.\",\n  \"crossReferences\": [\n    {\n      \"databaseType\": \"MIM\",\n      \"id\": \"612527\",\n      \"properties\": [\n        \"phenotype\"\n      ]\n    },\n    {\n      \"databaseType\": \"MedGen\",\n      \"id\": \"C2675860\"\n    },\n    {\n      \"databaseType\": \"MeSH\",\n      \"id\": \"D029503\"\n    }\n  ],\n  \"keywords\": [\n    {\n      \"name\": \"Diamond-Blackfan anemia\",\n      \"id\": \"KW-1024\"\n    }\n  ],\n  \"statistics\": {\n    \"reviewedProteinCount\": 1,\n    \"unreviewedProteinCount\": 0\n  }\n}",
+        "query": "What information is available for the disease identified as DI-00394?"
+    },
+    {
+        "function": "map_assembly",
+        "document": {
+            "name": "map_assembly",
+            "description": "Convert the co-ordinates of one assembly to another (Source: The Mapping endpoints provide access to coordinate mapping between different genome assemblies.)",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "asm_one": {
+                        "type": "string",
+                        "description": "Version of the input assembly"
+                    },
+                    "asm_two": {
+                        "type": "string",
+                        "description": "Version of the output assembly"
+                    },
+                    "region": {
+                        "type": "string",
+                        "description": "Query region"
+                    },
+                    "species": {
+                        "type": "string",
+                        "description": "Species name/alias"
+                    },
+                    "coord_system": {
+                        "type": "string",
+                        "description": "Name of the input coordinate system"
+                    },
+                    "target_coord_system": {
+                        "type": "string",
+                        "description": "Name of the output coordinate system"
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "asm_one",
+                    "asm_two",
+                    "region",
+                    "species"
+                ]
+            }
+        },
+        "params": {
+            "asm_one": "GRCh37",
+            "asm_two": "GRCh38",
+            "region": "MT:3307-3807",
+            "species": "human",
+            "coord_system": "chromosome",
+            "target_coord_system": "chromosome"
+        },
+        "observation": "{\n  \"mappings\": [\n    {\n      \"original\": {\n        \"end\": 3807,\n        \"seq_region_name\": \"MT\",\n        \"strand\": 1,\n        \"start\": 3307,\n        \"assembly\": \"GRCh37\",\n        \"coord_system\": \"chromosome\"\n      },\n      \"mapped\": {\n        \"strand\": 1,\n        \"assembly\": \"GRCh38\",\n        \"start\": 3307,\n        \"seq_region_name\": \"MT\",\n        \"end\": 3807,\n        \"coord_system\": \"chromosome\"\n      }\n    }\n  ]\n}",
+        "query": "How does the human region MT:3307-3807 map between GRCh37 and GRCh38?"
+    },
+    {
+        "function": "get_variation",
+        "document": {
+            "name": "get_variation",
+            "description": "Uses a variant identifier (e.g. rsID) to return the variation features including optional genotype, phenotype and population data (Source: The Variation endpoints provide access to genetic variant information and annotations.)",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Variant identifier, including structural variant identifiers."
+                    },
+                    "species": {
+                        "type": "string",
+                        "description": "Species name/alias"
+                    },
+                    "genotypes": {
+                        "type": "boolean",
+                        "description": "Include individual genotypes"
+                    },
+                    "genotyping_chips": {
+                        "type": "boolean",
+                        "description": "Include genotyping chips information"
+                    },
+                    "phenotypes": {
+                        "type": "boolean",
+                        "description": "Include phenotypes"
+                    },
+                    "pops": {
+                        "type": "boolean",
+                        "description": "Include population allele frequencies"
+                    },
+                    "population_genotypes": {
+                        "type": "boolean",
+                        "description": "Include population genotype frequencies"
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "id",
+                    "species"
+                ]
+            }
+        },
+        "params": {
+            "id": "rs228289896",
+            "species": "mouse",
+            "phenotypes": true
+        },
+        "observation": "{\n  \"minor_allele\": null,\n  \"source\": \"Short variant data imported from EVA\",\n  \"most_severe_consequence\": \"non_coding_transcript_exon_variant\",\n  \"mappings\": [\n    {\n      \"location\": \"X:7707742-7707742\",\n      \"end\": 7707742,\n      \"coord_system\": \"chromosome\",\n      \"start\": 7707742,\n      \"assembly_name\": \"GRCm39\",\n      \"allele_string\": \"C/T\",\n      \"ancestral_allele\": null,\n      \"strand\": 1,\n      \"seq_region_name\": \"X\"\n    }\n  ],\n  \"ambiguity\": \"Y\",\n  \"phenotypes\": [],\n  \"synonyms\": [],\n  \"name\": \"rs228289896\",\n  \"MAF\": null,\n  \"evidence\": [\n    \"Multiple_observations\"\n  ],\n  \"var_class\": \"SNP\"\n}",
+        "query": "What are the variation features for mouse variant rs228289896?"
+    },
+    {
+        "function": "get_taxonomy_by_id",
+        "document": {
+            "name": "get_taxonomy_by_id",
+            "description": "Search taxonomy entry by id to return all data associated with that entry. Specify fields to return only data for specific sections of that entry that are of interest to you (Source: UniProtKB taxonomy data is manually curated: next to manually verified organism names, we provide a selection of external links, organism strains and viral host information.)",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "taxonId": {
+                        "type": "string",
+                        "description": "Unique identifier for the taxonomy entry"
+                    },
+                    "fields": {
+                        "type": "string",
+                        "description": "List of entry sections (fields) to be returned, separated by commas."
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "taxonId"
+                ]
+            }
+        },
+        "params": {
+            "taxonId": "217",
+            "fields": "mnemonic,statistics"
+        },
+        "observation": "{\n  \"taxonId\": 217,\n  \"mnemonic\": \"HELMU\",\n  \"statistics\": {\n    \"reviewedProteinCount\": 6,\n    \"unreviewedProteinCount\": 1422,\n    \"referenceProteomeCount\": 0,\n    \"proteomeCount\": 1\n  }\n}",
+        "query": "How many reviewed proteins are available for Taxon ID 217?"
+    },
+    {
+        "function": "lookup_by_symbol",
+        "document": {
+            "name": "lookup_by_symbol",
+            "description": "Find the species and database for a symbol in a linked external database (Source: The Lookup endpoints provide access to gene and feature lookup functionality using identifiers and symbols.)",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "species": {
+                        "type": "string",
+                        "description": "Species name/alias"
+                    },
+                    "symbol": {
+                        "type": "string",
+                        "description": "A name or symbol from an annotation source has been linked to a genetic feature"
+                    },
+                    "expand": {
+                        "type": "boolean",
+                        "description": "Expands the search to include any connected features. e.g. If the object is a gene, its transcripts, translations and exons will be returned as well."
+                    },
+                    "format": {
+                        "type": "string",
+                        "description": "Specify the layout of the response"
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "species",
+                    "symbol"
+                ]
+            }
+        },
+        "params": {
+            "species": "ferret",
+            "symbol": "MAP2K3",
+            "expand": true,
+            "format_": "full"
+        },
+        "observation": "{\n  \"end\": 137128,\n  \"canonical_transcript\": \"ENSMPUT00000000007.1\",\n  \"id\": \"ENSMPUG00000000007\",\n  \"species\": \"ferret\",\n  \"biotype\": \"protein_coding\",\n  \"assembly_name\": \"MusPutFur1.0\",\n  \"start\": 105694,\n  \"Transcript\": [\n    {\n      \"Exon\": [\n        {\n          \"end\": 137128,\n          \"object_type\": \"Exon\",\n          \"seq_region_name\": \"GL897131.1\",\n          \"id\": \"ENSMPUE00000000013\",\n          \"species\": \"ferret\",\n          \"start\": 136241,\n          \"assembly_name\": \"MusPutFur1.0\",\n          \"strand\": -1,\n          \"db_type\": \"core\",\n          \"version\": 1\n        },\n        {\n          \"db_type\": \"core\",\n          \"version\": 1,\n          \"strand\": -1,\n          \"species\": \"ferret\",\n          \"assembly_name\": \"MusPutFur1.0\",\n          \"start\": 120731,\n          \"object_type\": \"Exon\",\n          \"end\": 120797,\n          \"id\": \"ENSMPUE00000000014\",\n          \"seq_region_name\": \"GL897131.1\"\n        },\n        {\n          \"strand\": -1,\n          \"db_type\": \"core\",\n          \"version\": 1,\n          \"object_type\": \"Exon\",\n          \"end\": 120313,\n          \"id\": \"ENSMPUE00000000015\",\n          \"seq_region_name\": \"GL897131.1\",\n          \"species\": \"ferret\",\n          \"assembly_name\": \"MusPutFur1.0\",\n          \"start\": 120265\n        },\n        {\n          \"strand\": -1,\n          \"version\": 1,\n          \"db_type\": \"core\",\n          \"seq_region_name\": \"GL897131.1\",\n          \"id\": \"ENSMPUE00000000016\",\n          \"end\": 119260,\n          \"object_type\": \"Exon\",\n          \"start\": 119147,\n          \"assembly_name\": \"MusPutFur1.0\",\n          \"species\": \"ferret\"\n        },\n        {\n          \"strand\": -1,\n          \"version\": 1,\n          \"db_type\": \"core\",\n          \"id\": \"ENSMPUE00000000017\",\n          \"seq_region_name\": \"GL897131.1\",\n          \"object_type\": \"Exon\",\n          \"end\": 118946,\n          \"assembly_name\": \"MusPutFur1.0\",\n          \"start\": 118827,\n          \"species\": \"ferret\"\n        },\n        {\n          \"end\": 117515,\n          \"object_type\": \"Exon\",\n          \"seq_region_name\": \"GL897131.1\",\n          \"id\": \"ENSMPUE00000000018\",\n          \"species\": \"ferret\",\n          \"start\": 117399,\n          \"assembly_name\": \"MusPutFur1.0\",\n          \"strand\": -1,\n          \"db_type\": \"core\",\n          \"version\": 1\n        },\n        {\n          \"strand\": -1,\n          \"version\": 1,\n          \"db_type\": \"core\",\n          \"id\": \"ENSMPUE00000000019\",\n          \"seq_region_name\": \"GL897131.1\",\n          \"object_type\": \"Exon\",\n          \"end\": 116168,\n          \"assembly_name\": \"MusPutFur1.0\",\n          \"start\": 116117,\n          \"species\": \"ferret\"\n        },\n        {\n          \"strand\": -1,\n          \"version\": 1,\n          \"db_type\": \"core\",\n          \"seq_region_name\": \"GL897131.1\",\n          \"id\": \"ENSMPUE00000000020\",\n          \"end\": 115087,\n          \"object_type\": \"Exon\",\n          \"start\": 114941,\n          \"assembly_name\": \"MusPutFur1.0\",\n          \"species\": \"ferret\"\n        },\n        {\n          \"version\": 1,\n          \"db_type\": \"core\",\n          \"strand\": -1,\n          \"start\": 114552,\n          \"assembly_name\": \"MusPutFur1.0\",\n          \"species\": \"ferret\",\n          \"seq_region_name\": \"GL897131.1\",\n          \"id\": \"ENSMPUE00000000021\",\n          \"end\": 114679,\n          \"object_type\": \"Exon\"\n        },\n        {\n          \"assembly_name\": \"MusPutFur1.0\",\n          \"start\": 113975,\n          \"species\": \"ferret\",\n          \"id\": \"ENSMPUE00000000022\",\n          \"seq_region_name\": \"GL897131.1\",\n          \"object_type\": \"Exon\",\n          \"end\": 114052,\n          \"version\": 1,\n          \"db_type\": \"core\",\n          \"strand\": -1\n        },\n        {\n          \"seq_region_name\": \"GL897131.1\",\n          \"id\": \"ENSMPUE00000000023\",\n          \"end\": 109713,\n          \"object_type\": \"Exon\",\n          \"start\": 109574,\n          \"assembly_name\": \"MusPutFur1.0\",\n          \"species\": \"ferret\",\n          \"strand\": -1,\n          \"version\": 1,\n          \"db_type\": \"core\"\n        },\n        {\n          \"db_type\": \"core\",\n          \"version\": 1,\n          \"strand\": -1,\n          \"species\": \"ferret\",\n          \"start\": 108858,\n          \"assembly_name\": \"MusPutFur1.0\",\n          \"end\": 108903,\n          \"object_type\": \"Exon\",\n          \"seq_region_name\": \"GL897131.1\",\n          \"id\": \"ENSMPUE00000000024\"\n        },\n        {\n          \"object_type\": \"Exon\",\n          \"end\": 108234,\n          \"id\": \"ENSMPUE00000000025\",\n          \"seq_region_name\": \"GL897131.1\",\n          \"species\": \"ferret\",\n          \"assembly_name\": \"MusPutFur1.0\",\n          \"start\": 105694,\n          \"strand\": -1,\n          \"db_type\": \"core\",\n          \"version\": 1\n        }\n      ],\n      \"version\": 1,\n      \"strand\": -1,\n      \"is_canonical\": 1,\n      \"species\": \"ferret\",\n      \"assembly_name\": \"MusPutFur1.0\",\n      \"biotype\": \"protein_coding\",\n      \"start\": 105694,\n      \"end\": 137128,\n      \"id\": \"ENSMPUT00000000007\",\n      \"length\": 4487,\n      \"db_type\": \"core\",\n      \"Parent\": \"ENSMPUG00000000007\",\n      \"source\": \"ensembl\",\n      \"display_name\": \"MAP2K3-201\",\n      \"Translation\": {\n        \"version\": 1,\n        \"Parent\": \"ENSMPUT00000000007\",\n        \"length\": 396,\n        \"db_type\": \"core\",\n        \"start\": 108151,\n        \"species\": \"ferret\",\n        \"id\": \"ENSMPUP00000000007\",\n        \"object_type\": \"Translation\",\n        \"end\": 136289\n      },\n      \"logic_name\": \"ensembl\",\n      \"object_type\": \"Transcript\",\n      \"gencode_primary\": 0,\n      \"seq_region_name\": \"GL897131.1\"\n    }\n  ],\n  \"strand\": -1,\n  \"version\": 1,\n  \"object_type\": \"Gene\",\n  \"seq_region_name\": \"GL897131.1\",\n  \"display_name\": \"MAP2K3\",\n  \"description\": \"mitogen-activated protein kinase kinase 3 [Source:UniProtKB Gene Name;Acc:M3XLQ7]\",\n  \"logic_name\": \"ensembl\",\n  \"db_type\": \"core\",\n  \"source\": \"ensembl\"\n}",
+        "query": "What information is available for the gene MAP2K3 in ferret?"
+    },
+    {
+        "function": "efetch",
+        "document": {
+            "name": "efetch",
+            "description": "Return formatted data records for a list of input UIDs or for a set stored on the Entrez History server. (Source: Returns formatted data records for UIDs from a list or from a set stored on the Entrez History server.)",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "db": {
+                        "type": "string",
+                        "description": "Database from which to retrieve records (default 'pubmed')."
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "UID list (single or comma-delimited). Required when input is a UID list."
+                    },
+                    "retmode": {
+                        "type": "string",
+                        "description": "Data format of returned records (e.g., 'text', 'html', 'xml'). Valid values vary by database."
+                    },
+                    "rettype": {
+                        "type": "string",
+                        "description": "Record view to return (e.g., 'abstract', 'medline', 'fasta', 'gb', 'gp'). Valid values vary by database."
+                    },
+                    "retstart": {
+                        "type": "integer",
+                        "description": "Index of the first record to retrieve (default=0)."
+                    },
+                    "retmax": {
+                        "type": "integer",
+                        "description": "Total number of records to retrieve (maximum 10000)."
+                    },
+                    "strand": {
+                        "type": "integer",
+                        "description": "Sequence databases only: 1 for plus strand, 2 for minus strand."
+                    },
+                    "seq_start": {
+                        "type": "integer",
+                        "description": "Sequence databases only: first base coordinate to retrieve (1-based)."
+                    },
+                    "seq_stop": {
+                        "type": "integer",
+                        "description": "Sequence databases only: last base coordinate to retrieve (1-based)."
+                    },
+                    "complexity": {
+                        "type": "integer",
+                        "description": "Sequence databases only: data content level. 0 entire blob, 1 bioseq, 2 minimal bioseq-set, 3 minimal nuc-prot, 4 minimal pub-set."
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "db",
+                    "id"
+                ]
+            }
+        },
+        "params": {
+            "db": "protein",
+            "id": "3050029217",
+            "rettype": "gp"
+        },
+        "observation": "{\n  \"record_count\": 1,\n  \"records\": [\n    {\n      \"overview\": {\n        \"locus\": \"WP_442897212\",\n        \"definition\": \"gp53-like domain-containing protein [Escherichia coli]\",\n        \"accession\": \"WP_442897212\",\n        \"accession_version\": \"WP_442897212.1\",\n        \"length\": \"143\",\n        \"moltype\": \"AA\",\n        \"topology\": \"linear\",\n        \"organism\": \"Escherichia coli\",\n        \"taxonomy\": \"Bacteria; Pseudomonadati; Pseudomonadota; Gammaproteobacteria; Enterobacterales; Enterobacteriaceae; Escherichia\",\n        \"create_date\": \"26-AUG-2025\",\n        \"update_date\": \"26-AUG-2025\"\n      },\n      \"other_seqids\": [\n        \"ref|WP_442897212.1|\",\n        \"gi|3050029217\"\n      ],\n      \"keywords\": [\n        \"RefSeq\"\n      ],\n      \"comment\": \"REFSEQ: This record represents a single, non-redundant, protein sequence which may be annotated on many different RefSeq genomes from the same, or different, species.; ##Evidence-For-Name-Assignment-\u2026\",\n      \"features\": [\n        {\n          \"key\": \"source\",\n          \"location\": \"1..143\"\n        },\n        {\n          \"key\": \"Protein\",\n          \"location\": \"1..143\",\n          \"qualifiers\": {\n            \"product\": \"gp53-like domain-containing protein\"\n          }\n        }\n      ]\n    }\n  ]\n}",
+        "query": "What is the description of protein GI 3050029217?"
+    },
+    {
+        "function": "get_uniprotkb_entry",
+        "document": {
+            "name": "get_uniprotkb_entry",
+            "description": "Search UniProtKB by protein entry accession to return all data associated with that entry. Specify fields to return only data for specific sections of that entry that are of interest to you (Source: The UniProt Knowledgebase (UniProtKB) acts as the global hub of accurate, consistent and expertly curated information on protein sequence and function. Each UniProtKB entry is described by a stable protein identifier (accession ID) and contains core data consisting of the amino acid sequence, protein name or description, taxonomic information and links to relevant scientific publications. Further annotation is added when available, such as protein function, subcellular location and the position of protein features such as active sites, domains and post-translational modifications. Where possible these annotations are described using established biological ontologies, classifications and cross-references. A clear indication of the quality of annotation in the form of evidence attribution of experimental and computational data is added to each piece of data.)",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "accession": {
+                        "type": "string",
+                        "description": "Unique and stable identifier for each UniProtKB entry"
+                    },
+                    "fields": {
+                        "type": "string",
+                        "description": "List of entry sections (fields) to be returned, separated by commas."
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "accession"
+                ]
+            }
+        },
+        "params": {
+            "accession": "O60381",
+            "fields": "ft_compbias,xref_conoserver,ft_repeat"
+        },
+        "observation": "{\n  \"summary\": {\n    \"accession\": \"O60381\",\n    \"entryType\": \"UniProtKB reviewed (Swiss-Prot)\",\n    \"featureCounts\": {\n      \"Compositional bias\": 1\n    }\n  },\n  \"statistics\": {\n    \"featureTypes\": {\n      \"Compositional bias\": 1\n    }\n  }\n}",
+        "query": "What annotations regarding compositional bias, repeats, or ConoServer references are available for protein O60381?"
+    },
+    {
+        "function": "get_genetree_by_id",
+        "document": {
+            "name": "get_genetree_by_id",
+            "description": "Retrieves a gene tree for a gene tree stable identifier (Source: The Comparative Genomics endpoints provide access to comparative genomics data including gene trees and homology information.)",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "An Ensembl genetree ID"
+                    },
+                    "aligned": {
+                        "type": "boolean",
+                        "description": "Return the aligned string if true. Otherwise, return the original sequence (no insertions)"
+                    },
+                    "cigar_line": {
+                        "type": "boolean",
+                        "description": "Return the aligned sequence encoded in CIGAR format"
+                    },
+                    "clusterset_id": {
+                        "type": "string",
+                        "description": "Name of the gene-tree resource being queried. Common values are \"default\" for the standard multi-clade trees (which exclude all non-reference strains) and \"murinae\" for the trees spanning all mouse strains. By default, the most inclusive analysis will be selected"
+                    },
+                    "compara": {
+                        "type": "string",
+                        "description": "Name of the compara database to use. Multiple comparas exist on a server for separate species divisions"
+                    },
+                    "prune_species": {
+                        "type": "string",
+                        "description": "Prune the tree by species. Supports all species aliases. Will return a tree with only the species given"
+                    },
+                    "prune_taxon": {
+                        "type": "integer",
+                        "description": "Prune the tree by taxon. Will return a tree with only the taxons given"
+                    },
+                    "sequence": {
+                        "type": "string",
+                        "description": "The type of sequence to bring back. Setting it to none results in no sequence being returned"
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "id"
+                ]
+            }
+        },
+        "params": {
+            "id": "ENSGT00390000001518",
+            "aligned": "1"
+        },
+        "observation": "{\n  \"root\": {\n    \"id\": \"ENSGT00390000001518\",\n    \"type\": \"gene tree\",\n    \"rooted\": 1,\n    \"events\": {\n      \"type\": \"speciation\"\n    },\n    \"taxonomy\": {\n      \"timetree_mya\": 1274.6,\n      \"scientific_name\": \"Opisthokonta\",\n      \"common_name\": \"Animals and Fungi\",\n      \"id\": 33154\n    }\n  },\n  \"metrics\": {\n    \"num_nodes\": 199,\n    \"num_sequences\": 100,\n    \"num_species\": 161\n  },\n  \"events_summary\": {\n    \"speciation\": 85,\n    \"duplication\": 3,\n    \"dubious\": 11\n  },\n  \"confidence_summary\": {\n    \"average_bootstrap\": 49.267605633802816,\n    \"num_bootstraps\": 71\n  },\n  \"summary_children\": [\n    {\n      \"taxonomy\": \"Bilateria\",\n      \"branch_length\": 0,\n      \"subtree_nodes\": 193,\n      \"subtree_sequences\": 97,\n      \"num_species\": 159,\n      \"events_summary\": {\n        \"duplication\": 1,\n        \"speciation\": 84,\n        \"dubious\": 11\n      }\n    },\n    {\n      \"taxonomy\": \"Saccharomyces cerevisiae S288C\",\n      \"branch_length\": 0.522843,\n      \"subtree_nodes\": 5,\n      \"subtree_sequences\": 3,\n      \"num_species\": 1,\n      \"events_summary\": {\n        \"duplication\": 2\n      }\n    }\n  ],\n  \"major_species_sample\": [\n    \"Anolis carolinensis reference strain\",\n    \"Sarcophilus harrisii\",\n    \"Mus musculus reference (CL57BL6) strain\",\n    \"Mammalia\",\n    \"Macaca fascicularis\",\n    \"Ornithorhynchus anatinus\",\n    \"Ciona savignyi\",\n    \"Cyprinoidei\",\n    \"Callorhinchus milii\",\n    \"Pan troglodytes\"\n  ],\n  \"original_params\": {}\n}",
+        "query": "What is the common ancestral lineage for the gene tree ENSGT00390000001518?"
+    },
+    {
+        "function": "get_sequence_by_id",
+        "document": {
+            "name": "get_sequence_by_id",
+            "description": "Request multiple types of sequence by stable identifier. Supports feature masking and expand options. (Source: The Sequence endpoints provide access to DNA, RNA, and protein sequence data retrieval.)",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "An Ensembl stable ID"
+                    },
+                    "db_type": {
+                        "type": "string",
+                        "description": "Restrict the search to a database other than the default. Useful if you need to use a DB other than core"
+                    },
+                    "end": {
+                        "type": "integer",
+                        "description": "Trim the end of the sequence by this many basepairs. Trimming is relative to reading direction and in the coordinate system of the stable identifier. Parameter can not be used in conjunction with expand_5prime or expand_3prime."
+                    },
+                    "expand_3prime": {
+                        "type": "integer",
+                        "description": "Expand the sequence downstream of the sequence by this many basepairs. Only available when using genomic sequence type."
+                    },
+                    "expand_5prime": {
+                        "type": "integer",
+                        "description": "Expand the sequence upstream of the sequence by this many basepairs. Only available when using genomic sequence type."
+                    },
+                    "format": {
+                        "type": "string",
+                        "description": "Format of the data"
+                    },
+                    "mask": {
+                        "type": "string",
+                        "description": "Request the sequence masked for repeat sequences. Hard will mask all repeats as N's and soft will mask repeats as lowercased characters. Only available when using genomic sequence type."
+                    },
+                    "mask_feature": {
+                        "type": "boolean",
+                        "description": "Mask features on the sequence. If sequence is genomic, mask introns. If sequence is cDNA, mask UTRs. Incompatible with the 'mask' option"
+                    },
+                    "multiple_sequences": {
+                        "type": "boolean",
+                        "description": "Allow the service to return more than 1 sequence per identifier. This is useful when querying for a gene but using a type such as protein."
+                    },
+                    "object_type": {
+                        "type": "string",
+                        "description": "Filter by feature type"
+                    },
+                    "species": {
+                        "type": "string",
+                        "description": "Species name/alias"
+                    },
+                    "start": {
+                        "type": "integer",
+                        "description": "Trim the start of the sequence by this many basepairs. Trimming is relative to reading direction and in the coordinate system of the stable identifier. Parameter can not be used in conjunction with expand_5prime or expand_3prime."
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "Type of sequence. Defaults to genomic where applicable, i.e. not translations. cdna refers to the spliced transcript sequence with UTR; cds refers to the spliced transcript sequence without UTR."
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "id"
+                ]
+            }
+        },
+        "params": {
+            "id": "ENSPMAT00000006206",
+            "species": "lamprey",
+            "format_": "fasta",
+            "mask": "soft"
+        },
+        "observation": "{\n  \"seq\": \"CAGGTGACCCGGCTGGAGCAGACGTGGGCCGCCCTGCGCCAGCAGCACACGGAGAGCGCCATCGCCTACGAGAAGAAGCTCAAGCCCTTCCTCAAGTCGCTCAACGAGGGCAAAGGTCAGGCTCCagggcagagggcagagggcagaAGAGGGTCACGGGAGTGGGAGGGTCGTCATCCAGAGGTCAGCATCCGGTCCGGTGGAGCTGTGATCTCCAGTTGGGTCGAGTGACTCGCACGCGCTGACCAGTCGGTTAGCTCATTGGAGCTGaactgatgtcacggtggccagatgttaactccctcgcttggtatgtaggaggtcgatcccgacccagatgcctgctgtgtatttggagtttgcgtgttctctctacccgtggtcgtgtggatctttctccaggtcctccgtttttttccctctacatttggaatcaacatcatgcgtttagaaatgtttacatgatgataagccacttcgttgagctatcacttgtggccgtcaggttgcttctgaaacaagagctacatagtttttgtcggccttaccttctgaaataaaaATGTATTCCGTTACATTAttttttttAAATCGACCGGTGGCATTTACTTATTTATTTTTACATTCCCTCTCCCCTCTCCGGACGCAGAGGGCCTCCCGCTGTCAAACACGACGATCCCGCACATCGTGCCGCTGCTGCAGCTGCTGGAGAGGCCGTGCGGGAGCCTCGCGCAAGACGGCCCCCCGGAGCCCTGGGAGGGCCCCGACCACGGCCTGGGGGCCGTGCTGCGCCACCTGGAGAACGGGCGCTCCGTCGCGGCCAACGCGCGCATCTACAGCACCAACGCCGACGCCAAGCTCGCAGGTGGTGGCGCACGCCACGGCACGCACGCCGGCAAAGTAGCTGTCGGTGTTACCGATTGCCGTTTACTCGTGGTTGTGTGCtgcgtgttgaatttctttcacaccgtacgtggccaaccgtgctaatcggaggttgctcgTACGACTCGGTTGAGTACATTACGAGCGCTCAATTTACGAATCGCTCCGATGGCAAATTATTCACGAAGGAGGAAAATTGCGGCTCAAATGATAGCAACGAGGCATCCggtgcttgtctgctccctacagccctgcagagccagtggtagacattccacattcctatgacgggggccataataaaTCGCCAGTTACaaactcaactaaacaaatttttcttttattttacgaggtaaggcccactgagctacatagcttcttttagaagcgacctggccacaaagatagctcaatacggttgtttatcacgtggaaatttatagcagccgaattcgctaaactcgtgatgttgattctaaatgagggaaaaaccggagaacgcggataaaaatccacgcaaccacgaggagaatatacaaacgccaaatatacaggcgtcagggttgggatcgaacctacgacctcctgtaaatcaggtgaggtagttaacatctaatcaccgtgACCTCTCCGGGTTTTTCCCTGTcccccccccccgactcccctcccgccgccctccccccaccctccccacctctcttcccctccctccctGCCGGCAGGCGCTGTGCGGGACGAGAGGCTGCTGGACGTCTTCCGCACGGAGTTCATGCTGAAGCTGCTGTGGGGCAGCAAGGGCGCCGAGGTGGCCCAGTCGGAGCGCTACGACAAGTTCGAGCAGATCCTCAACGTCCTCTCCAAGCGCCTCGAGCCGCCCGTCAAGCAGAGCGAGCTCTGA\",\n  \"molecule\": \"dna\",\n  \"desc\": \"scaffold:Pmarinus_7.0:GL481050:550:2332:1\",\n  \"id\": \"ENSPMAT00000006206\",\n  \"query\": \"ENSPMAT00000006206\",\n  \"version\": 1\n}",
+        "query": "Can you retrieve the soft-masked DNA sequence for ENSPMAT00000006206?"
+    },
+    {
+        "function": "blast",
+        "document": {
+            "name": "blast",
+            "description": "Submit a query sequence to the BLAST server. The server will return a list of the best matches found in the database. (Source: The Basic Local Alignment Search Tool (BLAST) finds regions of local similarity between sequences. The program compares nucleotide or protein sequences to sequence databases and calculates the statistical significance of matches. BLAST can be used to infer functional and evolutionary relationships between sequences as well as help identify members of gene families)",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "The query sequence to search against the database. Allowed values: 'Accession', 'GI', or 'FASTA'."
+                    },
+                    "database": {
+                        "type": "string",
+                        "description": "The database to search against. Allowed values: Database file name (e.g.: core_nt, swissprot)."
+                    },
+                    "program": {
+                        "type": "string",
+                        "description": "The program to use. Must be one of blastn, blastp, blastx, tblastn, tblastx. To enable megablast, use `PROGRAM=blastn&amp;MEGABLAST=on`. Default: `blastn`"
+                    },
+                    "FILTER": {
+                        "type": "string",
+                        "description": "Low complexity filter. `F` to disable. `T` or `L` to enable. Prepend 'm' for mask at lookup (e.g., `mL`). Default: blastn: `ml`, blastp, tblastn, blastx: `F`, tblastx: `L`."
+                    },
+                    "EXPECT": {
+                        "type": "string",
+                        "description": "This setting specifies the statistical significance threshold for reporting matches against database sequences. The number must be greater than zero (e.g.: `10`, `1e-3`). Default: `10`"
+                    },
+                    "WORD_SIZE": {
+                        "type": "integer",
+                        "description": "Size of word for initial matches. blastn: `7`, `11`, `15`. megablast: `16`, `20`, `24`, `28`, `32`, `48`, `64`. blastp: `3`, `5`, `6`. tblastn, blastx: `2`, `3`, `5`, `6`. tblastx: `2`, `3`. Default: blastn: `11`, megablast: `28`, blastp, tblastx: `3`, tblastn, blastx: `5`."
+                    },
+                    "GAPCOSTS": {
+                        "type": "string",
+                        "description": "Gap existence and extension costs. Only applicable for blastn, blastp, blastx, tblastn. Pair of positive integers separated by a space. blastn: `4 4`, `2 4`, `0 4`, `3 3`, `6 2`, `5 2`, `4 2`, `2 2`. blastp, blastx, tblastn: `11 2`, `10 2`, `9 2`, `8 2`, `7 2`, `6 2`, `13 1`, `12 1`, `11 1`, `10 1`, `9 1`. Default: blastn: `5 2`. blastp, blastx, tblastn: `11 2`."
+                    },
+                    "MATRIX": {
+                        "type": "string",
+                        "description": "Scoring matrix name. Only applicable for blastp, blastx, tblastn, tblastx. Must be one of `BLOSUM45`, `BLOSUM50`, `BLOSUM62`, `BLOSUM80`, `BLOSUM90`, `PAM250`, `PAM30` or `PAM70`. Default: `BLOSUM62`"
+                    },
+                    "COMPOSITION_BASED_STATISTICS": {
+                        "type": "integer",
+                        "description": "Composition based statistics algorithm to use. Only applicable for blastp, blastx, tblastn, tblastx. Must be one of `0`, `1`, `2`, `3`. Default: `2`"
+                    },
+                    "HITLIST_SIZE": {
+                        "type": "integer",
+                        "description": "Number of databases sequences to keep. Should be integer greater than zero. Default: `100`"
+                    },
+                    "SHORT_QUERY_ADJUST": {
+                        "type": "string",
+                        "description": "Automatically adjust parameters for input sequences shorter than 30 bases/residues. Only applicable for blastn and blastp. Alowed values: `true`, `false`. Default: `false`."
+                    },
+                    "FORMAT_TYPE": {
+                        "type": "string",
+                        "description": "Report type. Allowed values: `HTML`, `Text`, `XML2`, `XML2_S`, `JSONSA`, `JSON2`, `JSON2_S`, `SAM`. Default: `HTML`."
+                    },
+                    "DESCRIPTIONS": {
+                        "type": "integer",
+                        "description": "Number of descriptions to print. Should be integer greater than zero. Supported only for `HTML` and `Text` formats. Default: `100`"
+                    },
+                    "ALIGNMENTS": {
+                        "type": "integer",
+                        "description": "Number of alignments to print. Should be integer greater than zero. Supported only for `HTML` and `Text` formats. Default: `100`"
+                    },
+                    "NCBI_GI": {
+                        "type": "string",
+                        "description": "Whether to show NCBI GIs in report. Allowed values: `true`, `false`. Supported only for `blastn`, `tblastn` and `tblastx` programs. Default: `false`."
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "query",
+                    "database",
+                    "program"
+                ]
+            }
+        },
+        "params": {
+            "query": ">3118011844_p_bp_0\nGHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\n",
+            "database": "nr",
+            "program": "blastp",
+            "EXPECT": 1,
+            "HITLIST_SIZE": 25,
+            "FORMAT_TYPE": "JSON2",
+            "DESCRIPTIONS": 10,
+            "ALIGNMENTS": 10,
+            "timeout": 120.0,
+            "FILTER": "F"
+        },
+        "observation": "{\n  \"query_len\": 80,\n  \"total_hits\": 25,\n  \"db_num\": 976087544,\n  \"db_len\": 1186732593,\n  \"hits\": [\n    {\n      \"id\": \"ref|WP_364422375.1|\",\n      \"title\": \"M36 family metallopeptidase [Actinomadura coerulea]\",\n      \"taxid\": 46159,\n      \"sciname\": \"Actinomadura coerulea\",\n      \"evalue\": 1.72538e-46,\n      \"bitscore\": 169.859,\n      \"identity\": 80,\n      \"align_len\": 80,\n      \"gaps\": 0,\n      \"q_from\": 1,\n      \"q_to\": 80,\n      \"h_from\": 414,\n      \"h_to\": 493,\n      \"q_cov\": 1.0,\n      \"num_hsps\": 1,\n      \"alignment\": {\n        \"qseq\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\",\n        \"hseq\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\",\n        \"midline\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\"\n      }\n    },\n    {\n      \"id\": \"dbj|GAA4343905.1|\",\n      \"title\": \"hypothetical protein GCM10023178_57000 [Actinomadura luteofluorescens]\",\n      \"taxid\": 46163,\n      \"sciname\": \"Actinomadura luteofluorescens\",\n      \"evalue\": 1.78903e-46,\n      \"bitscore\": 169.474,\n      \"identity\": 80,\n      \"align_len\": 80,\n      \"gaps\": 0,\n      \"q_from\": 1,\n      \"q_to\": 80,\n      \"h_from\": 267,\n      \"h_to\": 346,\n      \"q_cov\": 1.0,\n      \"num_hsps\": 1,\n      \"alignment\": {\n        \"qseq\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\",\n        \"hseq\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\",\n        \"midline\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\"\n      }\n    },\n    {\n      \"id\": \"gb|MGW2314766.1|\",\n      \"title\": \"M36 family metallopeptidase [Actinomadura luteofluorescens]\",\n      \"taxid\": 46163,\n      \"sciname\": \"Actinomadura luteofluorescens\",\n      \"evalue\": 1.89008e-46,\n      \"bitscore\": 169.859,\n      \"identity\": 80,\n      \"align_len\": 80,\n      \"gaps\": 0,\n      \"q_from\": 1,\n      \"q_to\": 80,\n      \"h_from\": 352,\n      \"h_to\": 431,\n      \"q_cov\": 1.0,\n      \"num_hsps\": 1,\n      \"alignment\": {\n        \"qseq\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\",\n        \"hseq\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\",\n        \"midline\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\"\n      }\n    },\n    {\n      \"id\": \"ref|WP_185024309.1|\",\n      \"title\": \"M36 family metallopeptidase [Actinomadura coerulea]\",\n      \"taxid\": 46159,\n      \"sciname\": \"Actinomadura coerulea\",\n      \"evalue\": 1.97858e-46,\n      \"bitscore\": 169.859,\n      \"identity\": 80,\n      \"align_len\": 80,\n      \"gaps\": 0,\n      \"q_from\": 1,\n      \"q_to\": 80,\n      \"h_from\": 476,\n      \"h_to\": 555,\n      \"q_cov\": 1.0,\n      \"num_hsps\": 1,\n      \"alignment\": {\n        \"qseq\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\",\n        \"hseq\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\",\n        \"midline\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\"\n      }\n    },\n    {\n      \"id\": \"ref|WP_363977484.1|\",\n      \"title\": \"M36 family metallopeptidase [Actinomadura sp. NPDC049753]\",\n      \"taxid\": 3154739,\n      \"sciname\": \"Actinomadura sp. NPDC049753\",\n      \"evalue\": 2.13948e-46,\n      \"bitscore\": 169.859,\n      \"identity\": 80,\n      \"align_len\": 80,\n      \"gaps\": 0,\n      \"q_from\": 1,\n      \"q_to\": 80,\n      \"h_from\": 476,\n      \"h_to\": 555,\n      \"q_cov\": 1.0,\n      \"num_hsps\": 1,\n      \"alignment\": {\n        \"qseq\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\",\n        \"hseq\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\",\n        \"midline\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\"\n      }\n    },\n    {\n      \"id\": \"ref|WP_360581504.1|\",\n      \"title\": \"M36 family metallopeptidase [Actinomadura sp. NPDC048021]\",\n      \"taxid\": 3155385,\n      \"sciname\": \"Actinomadura sp. NPDC048021\",\n      \"evalue\": 2.20313e-46,\n      \"bitscore\": 169.859,\n      \"identity\": 80,\n      \"align_len\": 80,\n      \"gaps\": 0,\n      \"q_from\": 1,\n      \"q_to\": 80,\n      \"h_from\": 476,\n      \"h_to\": 555,\n      \"q_cov\": 1.0,\n      \"num_hsps\": 1,\n      \"alignment\": {\n        \"qseq\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\",\n        \"hseq\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\",\n        \"midline\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\"\n      }\n    },\n    {\n      \"id\": \"ref|WP_258942981.1|\",\n      \"title\": \"M36 family metallopeptidase [Actinomadura luteofluorescens]\",\n      \"taxid\": 46163,\n      \"sciname\": \"Actinomadura luteofluorescens\",\n      \"evalue\": 2.24417e-46,\n      \"bitscore\": 169.859,\n      \"identity\": 80,\n      \"align_len\": 80,\n      \"gaps\": 0,\n      \"q_from\": 1,\n      \"q_to\": 80,\n      \"h_from\": 475,\n      \"h_to\": 554,\n      \"q_cov\": 1.0,\n      \"num_hsps\": 1,\n      \"alignment\": {\n        \"qseq\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\",\n        \"hseq\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\",\n        \"midline\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\"\n      }\n    },\n    {\n      \"id\": \"gb|XWA37732.1|\",\n      \"title\": \"M36 family metallopeptidase [Actinomadura sp. CA-154981]\",\n      \"taxid\": 3240037,\n      \"sciname\": \"Actinomadura sp. CA-154981\",\n      \"evalue\": 2.33618e-46,\n      \"bitscore\": 169.859,\n      \"identity\": 80,\n      \"align_len\": 80,\n      \"gaps\": 0,\n      \"q_from\": 1,\n      \"q_to\": 80,\n      \"h_from\": 476,\n      \"h_to\": 555,\n      \"q_cov\": 1.0,\n      \"num_hsps\": 1,\n      \"alignment\": {\n        \"qseq\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\",\n        \"hseq\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\",\n        \"midline\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\"\n      }\n    },\n    {\n      \"id\": \"ref|WP_338743118.1|\",\n      \"title\": \"M36 family metallopeptidase [Actinomadura luteofluorescens]\",\n      \"taxid\": 46163,\n      \"sciname\": \"Actinomadura luteofluorescens\",\n      \"evalue\": 2.45051e-46,\n      \"bitscore\": 169.859,\n      \"identity\": 80,\n      \"align_len\": 80,\n      \"gaps\": 0,\n      \"q_from\": 1,\n      \"q_to\": 80,\n      \"h_from\": 475,\n      \"h_to\": 554,\n      \"q_cov\": 1.0,\n      \"num_hsps\": 1,\n      \"alignment\": {\n        \"qseq\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\",\n        \"hseq\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\",\n        \"midline\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\"\n      }\n    },\n    {\n      \"id\": \"ref|WP_353832322.1|\",\n      \"title\": \"M36 family metallopeptidase [Actinomadura sp. NPDC000929]\",\n      \"taxid\": 3154517,\n      \"sciname\": \"Actinomadura sp. NPDC000929\",\n      \"evalue\": 2.50158e-46,\n      \"bitscore\": 169.859,\n      \"identity\": 80,\n      \"align_len\": 80,\n      \"gaps\": 0,\n      \"q_from\": 1,\n      \"q_to\": 80,\n      \"h_from\": 476,\n      \"h_to\": 555,\n      \"q_cov\": 1.0,\n      \"num_hsps\": 1,\n      \"alignment\": {\n        \"qseq\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\",\n        \"hseq\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\",\n        \"midline\": \"GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY\"\n      }\n    }\n  ]\n}",
+        "query": "Can you show the alignment statistics for sequence GHEYTHAISGRMIAGPDAGWSGPQAGAMNESTSDLFAMEYLNEYGLRQPGRTPYVIGGYVTGDRRAGIRNYDMSRSPLNY?"
+    },
+    {
+        "function": "overlap_by_region",
+        "document": {
+            "name": "overlap_by_region",
+            "description": "Retrieves features (e.g. genes, transcripts, variants and more) that overlap a given region. (Source: The Overlap endpoints provide access to feature overlap analysis and region-based queries.)",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "feature": {
+                        "type": "string",
+                        "description": "The type of feature to retrieve. Multiple values are accepted."
+                    },
+                    "region": {
+                        "type": "string",
+                        "description": "Query region. A maximum of 5Mb is allowed to be requested at any one time"
+                    },
+                    "species": {
+                        "type": "string",
+                        "description": "Species name/alias."
+                    },
+                    "biotype": {
+                        "type": "string",
+                        "description": "Functional classification of the gene or transcript to fetch. Cannot be used in conjunction with logic_name when querying transcripts."
+                    },
+                    "db_type": {
+                        "type": "string",
+                        "description": "Specify the database type to retrieve features from if not using the core database. We automatically choose the correct type of DB for variation, comparative and regulation features."
+                    },
+                    "logic_name": {
+                        "type": "string",
+                        "description": "Limit retrieval of genes, transcripts and exons by the name of analysis."
+                    },
+                    "misc_set": {
+                        "type": "string",
+                        "description": "Miscellaneous set which groups together feature entries. Consult the DB or returned data sets to discover what is available."
+                    },
+                    "so_term": {
+                        "type": "string",
+                        "description": "Sequence Ontology term to restrict the variants found. Its descendants are also included in the search."
+                    },
+                    "species_set": {
+                        "type": "string",
+                        "description": "The species set name for retrieving constrained elements."
+                    },
+                    "trim_downstream": {
+                        "type": "boolean",
+                        "description": "Do not return features which overlap the downstream end of the region."
+                    },
+                    "trim_upstream": {
+                        "type": "boolean",
+                        "description": "Do not return features which overlap upstream end of the region."
+                    },
+                    "variant_set": {
+                        "type": "string",
+                        "description": "Short name of a set to restrict the variants found. (See list of short set names)"
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "feature",
+                    "region",
+                    "species"
+                ]
+            }
+        },
+        "params": {
+            "species": "mouse",
+            "region": "MT:3914-4114",
+            "feature": "constrained"
+        },
+        "observation": "[\n  {\n    \"start\": 3845,\n    \"score\": 58.8,\n    \"end\": 3915,\n    \"feature_type\": \"constrained\",\n    \"strand\": 1,\n    \"seq_region_name\": \"MT\",\n    \"ID\": 95940001569123\n  }\n]",
+        "query": "What constrained elements overlap the mouse genomic region MT:3914-4114?"
+    }
+]

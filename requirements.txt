@@ -1,0 +1,19 @@
+# Minimum dependencies to reproduce the BioTool evaluation pipeline.
+# Training is performed via LLaMA-Factory (see llamafactory_cfgs/README.md).
+
+openai>=1.30.0
+tqdm>=4.66
+numpy>=1.26
+requests>=2.31
+PyYAML>=6.0
+
+# MedCPT similarity (used by `unified_evaluate.py similarity`)
+torch>=2.1
+transformers>=4.40
+scikit-learn>=1.3
+
+# Optional fallback embedding model used by some legacy scripts
+sentence-transformers>=2.6
+
+# Used by the closed-source query / reasoning-chain construction scripts
+anthropic>=0.34
