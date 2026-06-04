@@ -5,7 +5,7 @@
 [![Model](https://img.shields.io/badge/Model-HuggingFace-yellow)](https://huggingface.co/gxx27/BioTool-finetuned-Qwen3-4B)
 
 
-![Procedure](figs/procedure.png)
+![Procedure](figs/motivation.png)
 
 
 ## 🔍 Overview
